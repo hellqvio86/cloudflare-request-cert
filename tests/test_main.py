@@ -5,13 +5,13 @@ def test_main_success(monkeypatch):
     monkeypatch.setattr(
         c,
         "load_config",
-        lambda: dict(
-            domain="example.com",
-            email="admin@example.com",
-            api_token="abc123",
-            staging=False,
-            propagation_seconds=10,
-        ),
+        lambda: {
+            "domain": "example.com",
+            "email": "admin@example.com",
+            "api_token": "abc123",
+            "staging": False,
+            "propagation_seconds": 10,
+        },
     )
 
     monkeypatch.setattr(c, "validate_credentials", lambda token: True)
@@ -24,13 +24,13 @@ def test_main_failure(monkeypatch):
     monkeypatch.setattr(
         c,
         "load_config",
-        lambda: dict(
-            domain="example.com",
-            email="admin@example.com",
-            api_token="abc123",
-            staging=False,
-            propagation_seconds=10,
-        ),
+        lambda: {
+            "domain": "example.com",
+            "email": "admin@example.com",
+            "api_token": "abc123",
+            "staging": False,
+            "propagation_seconds": 10,
+        },
     )
 
     monkeypatch.setattr(c, "validate_credentials", lambda token: False)
