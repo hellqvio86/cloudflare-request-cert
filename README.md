@@ -1,4 +1,9 @@
 # Cloudflare Request Cert
+![Python Version](https://img.shields.io/badge/python-3.10%2B-blue)
+![PyPI](https://img.shields.io/pypi/v/cloudflare-request-cert)
+![Build](https://github.com/hellqvio86/cloudflare-request-cert/actions/workflows/ci.yml/badge.svg)
+![Coverage](https://img.shields.io/badge/coverage-80%25%2B-green)
+![License](https://img.shields.io/github/license/hellqvio86/cloudflare-request-cert)
 
 A Python tool for requesting and renewing SSL/TLS certificates using Cloudflare DNS API with Let's Encrypt. Built with modern Python tooling using [uv](https://github.com/astral-sh/uv) for fast dependency management.
 
