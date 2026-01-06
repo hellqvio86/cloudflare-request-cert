@@ -5,19 +5,19 @@ from __future__ import annotations
 Cloudflare Request Cert - SSL/TLS certificate automation using Cloudflare DNS
 """
 
+import argparse
 import logging
 import os
-import sys
 import subprocess
-import argparse
+import sys
 from pathlib import Path
-from typing import Optional, TypedDict
+from typing import TypedDict
 
 
 class Config(TypedDict):
-    domain: Optional[str]
-    email: Optional[str]
-    api_token: Optional[str]
+    domain: str | None
+    email: str | None
+    api_token: str | None
     staging: bool
     propagation_seconds: int
 
@@ -61,16 +61,10 @@ def load_config() -> Config:
     config: Config = {
         "domain": args.domain or env_vars.get("DOMAIN") or os.getenv("DOMAIN"),
         "email": args.email or env_vars.get("EMAIL") or os.getenv("EMAIL"),
-        "api_token": env_vars.get("CLOUDFLARE_API_TOKEN")
-        or os.getenv("CLOUDFLARE_API_TOKEN"),
-        "staging": (
-            args.staging
-            or env_vars.get("STAGING") == "1"
-            or os.getenv("STAGING") == "1"
-        ),
+        "api_token": env_vars.get("CLOUDFLARE_API_TOKEN") or os.getenv("CLOUDFLARE_API_TOKEN"),
+        "staging": (args.staging or env_vars.get("STAGING") == "1" or os.getenv("STAGING") == "1"),
         "propagation_seconds": (
-            args.propagation_seconds
-            or int(env_vars.get("PROPAGATION_SECONDS", "10"))
+            args.propagation_seconds or int(env_vars.get("PROPAGATION_SECONDS", "10"))
             if env_vars.get("PROPAGATION_SECONDS")
             else (args.propagation_seconds or 10)
         ),
@@ -79,7 +73,7 @@ def load_config() -> Config:
     return config
 
 
-def validate_credentials(api_token: Optional[str]) -> bool:
+def validate_credentials(api_token: str | None) -> bool:
     """Validate that required credentials are present."""
     if not api_token:
         print("Error: CLOUDFLARE_API_TOKEN is required", file=sys.stderr)

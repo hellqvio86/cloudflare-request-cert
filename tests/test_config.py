@@ -1,20 +1,20 @@
-import os
 import textwrap
 from pathlib import Path
-import pytest
 
 import cloudflare_request_cert as c
 
 
 def test_load_env_file(tmp_path: Path):
     env = tmp_path / ".env"
-    env.write_text(textwrap.dedent("""
+    env.write_text(
+        textwrap.dedent("""
         # comment
         DOMAIN=example.com
         EMAIL=admin@example.com
         CLOUDFLARE_API_TOKEN=abc123
         PROPAGATION_SECONDS=20
-    """))
+    """)
+    )
 
     result = c.load_env_file(env)
 
@@ -31,10 +31,7 @@ def test_load_config_success(monkeypatch, tmp_path):
     monkeypatch.setenv("DOMAIN", "example.com")
     monkeypatch.setenv("EMAIL", "admin@example.com")
 
-    monkeypatch.setattr(
-        "sys.argv",
-        ["prog", "--env-file", str(env)]
-    )
+    monkeypatch.setattr("sys.argv", ["prog", "--env-file", str(env)])
 
     config = c.load_config()
 

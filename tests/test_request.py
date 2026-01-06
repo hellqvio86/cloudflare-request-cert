@@ -1,5 +1,5 @@
-from pathlib import Path
 import subprocess
+
 import cloudflare_request_cert as c
 
 
@@ -22,10 +22,7 @@ def test_request_certificate_success(mocker, tmp_path, monkeypatch):
 
 
 def test_request_certificate_subprocess_failure(mocker, tmp_path, monkeypatch):
-    mocker.patch(
-        "subprocess.run",
-        side_effect=subprocess.CalledProcessError(1, "cmd")
-    )
+    mocker.patch("subprocess.run", side_effect=subprocess.CalledProcessError(1, "cmd"))
 
     monkeypatch.setattr("pathlib.Path.home", lambda: tmp_path)
 
