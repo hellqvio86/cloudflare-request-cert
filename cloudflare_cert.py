@@ -2,6 +2,7 @@
 """
 Cloudflare Request Cert - SSL/TLS certificate automation using Cloudflare DNS
 """
+
 from __future__ import annotations
 
 import argparse
