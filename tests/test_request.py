@@ -1,6 +1,6 @@
 import subprocess
 
-import cloudflare_request_cert as c
+import cloudflare_cert as c
 
 
 def test_request_certificate_success(mocker, tmp_path, monkeypatch):

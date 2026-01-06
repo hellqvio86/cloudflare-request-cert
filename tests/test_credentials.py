@@ -1,4 +1,4 @@
-import cloudflare_request_cert as c
+import cloudflare_cert as c
 
 
 def test_validate_credentials_missing(capsys):

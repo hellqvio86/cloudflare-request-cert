@@ -1,7 +1,7 @@
 import textwrap
 from pathlib import Path
 
-import cloudflare_request_cert as c
+import cloudflare_cert as c
 
 
 def test_load_env_file(tmp_path: Path):
