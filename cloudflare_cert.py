@@ -2,7 +2,7 @@
 """
 Cloudflare Request Cert - SSL/TLS certificate automation using Cloudflare DNS
 """
-
+import logging
 import os
 import sys
 import subprocess
@@ -21,6 +21,8 @@ def load_env_file(env_file: Path) -> dict[str, str]:
                 if line and not line.startswith("#"):
                     key, _, value = line.partition("=")
                     env_vars[key.strip()] = value.strip().strip("\"'")
+    logging.debug("Loaded environment variables: %s", env_vars)
+
     return env_vars
 
 
@@ -156,6 +158,7 @@ def main():
         return 1
 
     # Request certificate
+    logging.debug(f"Requesting certificate for {domain} with propagation wait: {propagation_seconds}s, staging: {staging} and email: {email}")
     return request_certificate(
         domain=domain,
         email=email,

@@ -1,5 +1,5 @@
 """Tests for cloudflare_cert module"""
-
+import logging
 import subprocess
 from unittest.mock import MagicMock, patch
 
@@ -308,8 +308,11 @@ class TestMain:
 
     @patch("cloudflare_cert.request_certificate")
     @patch("cloudflare_cert.load_env_file")
-    def test_main_with_custom_propagation(self, mock_load_env, mock_request_cert):
+    def test_main_with_custom_propagation(self, mock_load_env, mock_request_cert, caplog):
         """Test main with custom propagation seconds"""
+
+        caplog.set_level(logging.DEBUG)
+
         mock_load_env.return_value = {"CLOUDFLARE_API_TOKEN": "test_token"}
         mock_request_cert.return_value = 0
 
