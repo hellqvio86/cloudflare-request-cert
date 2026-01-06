@@ -41,22 +41,12 @@ dev:
 	uv sync --all-extras
 
 # Run the tool
+# Run the tool, forwarding DOMAIN, EMAIL, STAGING, etc. to Python
 run:
-ifndef DOMAIN
-	@echo "Error: DOMAIN is required"
-	@echo "Usage: make run DOMAIN=example.com EMAIL=admin@example.com"
-	@exit 1
-endif
-ifndef EMAIL
-	@echo "Error: EMAIL is required"
-	@echo "Usage: make run DOMAIN=example.com EMAIL=admin@example.com"
-	@exit 1
-endif
-	@if [ "$(STAGING)" = "1" ]; then \
-		uv run python cloudflare_cert.py -d $(DOMAIN) -e $(EMAIL) --staging; \
-	else \
-		uv run python cloudflare_cert.py -d $(DOMAIN) -e $(EMAIL); \
-	fi
+	uv run python cloudflare_cert.py \
+		$(if $(DOMAIN),-d $(DOMAIN)) \
+		$(if $(EMAIL),-e $(EMAIL)) \
+		$(if $(STAGING),--staging)
 
 # Lint with ruff
 lint:
