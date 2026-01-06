@@ -1,10 +1,9 @@
 """Tests for cloudflare_cert module"""
 
-import pytest
-from pathlib import Path
-from unittest.mock import patch, MagicMock, mock_open
 import subprocess
-from cloudflare_cert import load_env_file, validate_credentials, request_certificate, main
+from unittest.mock import MagicMock, patch
+
+from cloudflare_cert import load_env_file, main, request_certificate, validate_credentials
 
 
 class TestLoadEnvFile:
