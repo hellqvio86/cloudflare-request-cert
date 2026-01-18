@@ -177,6 +177,9 @@ jobs:
   publish:
     name: Build and Publish
     runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/cloudflare-request-cert
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
       - name: Checkout code
