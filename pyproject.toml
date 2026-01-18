@@ -2,11 +2,29 @@
 name = "cloudflare-request-cert"
 version = "0.1.0"
 description = "SSL/TLS certificate automation using Cloudflare DNS"
+authors = [{ name = "Olof Hellqvist", email = "olof.hellqvist@gmail.com" }]
+license = { text = "MIT" }
+readme = "README.md"
 requires-python = ">=3.10"
-dependencies = [
-    "certbot>=2.11.0",
-    "certbot-dns-cloudflare>=2.11.0",
+keywords = ["cloudflare", "certbot", "ssl", "tls", "dns-01"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: System :: Systems Administration",
+    "Topic :: Security",
 ]
+dependencies = ["certbot>=2.11.0", "certbot-dns-cloudflare>=2.11.0"]
+
+[project.urls]
+Homepage = "https://github.com/hellqvio86/cloudflare-request-cert"
+Repository = "https://github.com/hellqvio86/cloudflare-request-cert"
+Issues = "https://github.com/hellqvio86/cloudflare-request-cert/issues"
 
 [project.optional-dependencies]
 dev = [
@@ -17,22 +35,29 @@ dev = [
     "cyclonedx-bom>=5.0.0",
 ]
 
+[project.scripts]
+cloudflare-request-cert = "cloudflare_request_cert.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
 [tool.ruff]
 line-length = 100
 target-version = "py310"
 
 [tool.ruff.lint]
 select = [
-    "E",   # pycodestyle errors
-    "W",   # pycodestyle warnings
-    "F",   # pyflakes
-    "I",   # isort
-    "B",   # flake8-bugbear
-    "C4",  # flake8-comprehensions
-    "UP",  # pyupgrade
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
 ]
 ignore = [
-    "E501",  # line too long (handled by formatter)
+    "E501", # line too long (handled by formatter)
 ]
 
 [tool.ruff.format]
@@ -47,11 +72,7 @@ python_functions = ["test_*"]
 addopts = "-v --strict-markers"
 [tool.coverage.run]
 source = ["."]
-omit = [
-    "tests/*",
-    ".venv/*",
-    "setup.py",
-]
+omit = ["tests/*", ".venv/*", "setup.py"]
 
 [tool.coverage.report]
 exclude_lines = [

@@ -286,7 +286,7 @@ sdist = { url = "https://files.pythonhosted.org/packages/9b/8f/d3a435435c42d4b05
 [[package]]
 name = "cloudflare-request-cert"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "certbot" },
     { name = "certbot-dns-cloudflare" },
