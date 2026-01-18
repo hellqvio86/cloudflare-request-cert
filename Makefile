@@ -1,4 +1,4 @@
-.PHONY: help venv install sync dev run clean lint format check test
+.PHONY: help venv install sync dev run clean lint format check test build publish
 
 # Default target
 help:
@@ -15,6 +15,8 @@ help:
 	@echo "  check                - Run all checks (lint + format check)"
 	@echo "  test                 - Run tests"
 	@echo "  sbom                 - Generate SBOM (Software Bill of Materials)"
+	@echo "  build                - Build source and wheel distributions"
+	@echo "  publish              - Publish package to PyPI"
 	@echo "  clean                - Remove virtual environment and cache files"
 	@echo ""
 	@echo "Usage examples:"
@@ -44,7 +46,7 @@ dev:
 # Run the tool
 # Run the tool, forwarding DOMAIN, EMAIL, STAGING, etc. to Python
 run:
-	uv run python cloudflare_cert.py \
+	uv run python -m cloudflare_request_cert.main \
 		$(if $(DOMAIN),-d $(DOMAIN)) \
 		$(if $(EMAIL),-e $(EMAIL)) \
 		$(if $(STAGING),--staging)
@@ -69,6 +71,14 @@ test:
 sbom:
 	uv run cyclonedx-py environment --output-file bom.json
 
+# Build package
+build:
+	uv build
+
+# Publish package
+publish:
+	uv publish
+
 # Clean up
 clean:
 	rm -rf .venv/
@@ -76,6 +86,7 @@ clean:
 	rm -rf .pytest_cache/
 	rm -rf __pycache__/
 	rm -rf *.egg-info/
+	rm -rf dist/
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	find . -type f -name "*.pyc" -delete
 	@echo "Cleaned up cache and virtual environment"

@@ -90,14 +90,14 @@ Set everything in `.env` and run without arguments:
 
 ```bash
 # .env file contains: CLOUDFLARE_API_TOKEN, DOMAIN, EMAIL
-uv run python cloudflare_cert.py
+cloudflare-request-cert
 ```
 
 #### 2. Using Command-Line Arguments Only
 
 ```bash
 # Provide all parameters via CLI (API token still from .env or environment)
-uv run python cloudflare_cert.py -d example.com -e admin@example.com
+cloudflare-request-cert -d example.com -e admin@example.com
 ```
 
 #### 3. Mix of Both (Recommended)
@@ -105,7 +105,7 @@ uv run python cloudflare_cert.py -d example.com -e admin@example.com
 ```bash
 # Store sensitive data in .env, pass domain/email via CLI
 # This is useful when managing multiple domains
-uv run python cloudflare_cert.py -d example.com -e admin@example.com
+cloudflare-request-cert -d example.com -e admin@example.com
 ```
 
 ### Using Make Commands
@@ -124,19 +124,19 @@ make run DOMAIN=example.com EMAIL=admin@example.com STAGING=1
 
 ```bash
 # Custom DNS propagation time
-uv run python cloudflare_cert.py \
+cloudflare-request-cert \
   -d example.com \
   -e admin@example.com \
   --propagation-seconds 30
 
 # Use staging environment for testing
-uv run python cloudflare_cert.py \
+cloudflare-request-cert \
   -d example.com \
   -e admin@example.com \
   --staging
 
 # Use custom .env file
-uv run python cloudflare_cert.py \
+cloudflare-request-cert \
   -d example.com \
   -e admin@example.com \
   --env-file /path/to/custom.env
@@ -154,7 +154,7 @@ Example:
 ```bash
 # .env has DOMAIN=old.com
 # This will use new.com (CLI argument takes precedence)
-uv run python cloudflare_cert.py -d new.com -e admin@example.com
+cloudflare-request-cert -d new.com -e admin@example.com
 ```
 
 ## Makefile Commands
@@ -192,7 +192,7 @@ The tool waits for DNS changes to propagate before Let's Encrypt validates your 
 
 ```bash
 # Via CLI
-python cloudflare_cert.py -d example.com -e admin@example.com --propagation-seconds 30
+cloudflare-request-cert -d example.com -e admin@example.com --propagation-seconds 30
 
 # Via .env
 PROPAGATION_SECONDS=30
@@ -262,10 +262,10 @@ cp .env.example .env
 nano .env  # Add your Cloudflare API token
 
 # 3. Test with staging (won't affect rate limits)
-uv run python cloudflare_cert.py -d example.com -e admin@example.com --staging
+cloudflare-request-cert -d example.com -e admin@example.com --staging
 
 # 4. Get production certificate
-uv run python cloudflare_cert.py -d example.com -e admin@example.com
+cloudflare-request-cert -d example.com -e admin@example.com
 ```
 
 ### Managing Multiple Domains
@@ -275,9 +275,9 @@ uv run python cloudflare_cert.py -d example.com -e admin@example.com
 echo "CLOUDFLARE_API_TOKEN=your_token" > .env
 
 # Request certificates for different domains
-uv run python cloudflare_cert.py -d site1.com -e admin@site1.com
-uv run python cloudflare_cert.py -d site2.com -e admin@site2.com
-uv run python cloudflare_cert.py -d site3.com -e admin@site3.com
+cloudflare-request-cert -d site1.com -e admin@site1.com
+cloudflare-request-cert -d site2.com -e admin@site2.com
+cloudflare-request-cert -d site3.com -e admin@site3.com
 ```
 
 ### Automated Script
@@ -291,7 +291,7 @@ EMAIL="admin@example.com"
 
 for domain in "${DOMAINS[@]}"; do
     echo "Requesting certificate for $domain..."
-    uv run python cloudflare_cert.py -d "$domain" -e "$EMAIL"
+    cloudflare-request-cert -d "$domain" -e "$EMAIL"
 done
 ```
 
@@ -324,7 +324,7 @@ EMAIL=admin@example.com
 
 Or pass them as arguments:
 ```bash
-uv run python cloudflare_cert.py -d example.com -e admin@example.com
+cloudflare-request-cert -d example.com -e admin@example.com
 ```
 
 ### API Token Permissions
@@ -338,7 +338,7 @@ Ensure your Cloudflare API token has:
 If validation fails, try increasing propagation time:
 
 ```bash
-uv run python cloudflare_cert.py -d example.com -e admin@example.com --propagation-seconds 60
+cloudflare-request-cert -d example.com -e admin@example.com --propagation-seconds 60
 ```
 
 Or set in `.env`:
@@ -355,7 +355,7 @@ Let's Encrypt has rate limits. Use staging for testing:
 STAGING=1
 
 # Or via CLI
-uv run python cloudflare_cert.py -d example.com -e admin@example.com --staging
+cloudflare-request-cert -d example.com -e admin@example.com --staging
 ```
 
 ## Comparison with Original
