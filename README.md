@@ -159,19 +159,20 @@ uv run python cloudflare_cert.py -d new.com -e admin@example.com
 
 ## Makefile Commands
 
-| Command | Description |
-|---------|-------------|
-| `make help` | Show all available commands |
-| `make venv` | Create virtual environment |
+| Command        | Description                                       |
+| -------------- | ------------------------------------------------- |
+| `make help`    | Show all available commands                       |
+| `make venv`    | Create virtual environment                        |
 | `make install` | Install uv and sync dependencies (alias for venv) |
-| `make sync` | Sync dependencies with uv |
-| `make dev` | Install development dependencies |
-| `make run` | Run the certificate request tool |
-| `make lint` | Lint code with ruff |
-| `make format` | Format code with ruff |
-| `make check` | Run all checks (lint + format) |
-| `make test` | Run tests |
-| `make clean` | Remove virtual environment and cache |
+| `make sync`    | Sync dependencies with uv                         |
+| `make dev`     | Install development dependencies                  |
+| `make run`     | Run the certificate request tool                  |
+| `make lint`    | Lint code with ruff                               |
+| `make format`  | Format code with ruff                             |
+| `make check`   | Run all checks (lint + format)                    |
+| `make test`    | Run tests                                         |
+| `make sbom`    | Generate SBOM (Software Bill of Materials)        |
+| `make clean`   | Remove virtual environment and cache              |
 
 ## Certificate Locations
 
@@ -240,6 +241,13 @@ make format
 ```bash
 make check
 ```
+
+### Generate SBOM
+Generate a Software Bill of Materials (SBOM) in CycloneDX JSON format:
+```bash
+make sbom
+```
+The SBOM will be saved to `bom.json`.
 
 ## Example Workflows
 

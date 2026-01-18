@@ -14,6 +14,7 @@ help:
 	@echo "  format               - Format code with ruff"
 	@echo "  check                - Run all checks (lint + format check)"
 	@echo "  test                 - Run tests"
+	@echo "  sbom                 - Generate SBOM (Software Bill of Materials)"
 	@echo "  clean                - Remove virtual environment and cache files"
 	@echo ""
 	@echo "Usage examples:"
@@ -63,6 +64,10 @@ check: lint
 # Run tests
 test:
 	uv run pytest tests/ -v
+
+# Generate SBOM
+sbom:
+	uv run cyclonedx-py environment --output-file bom.json
 
 # Clean up
 clean:
