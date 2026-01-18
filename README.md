@@ -7,6 +7,9 @@
 
 A Python tool for requesting and renewing SSL/TLS certificates using Cloudflare DNS API with Let's Encrypt. Built with modern Python tooling using [uv](https://github.com/astral-sh/uv) for fast dependency management.
 
+**Disclaimer:**
+This project is not affiliated with, endorsed by, or supported by Cloudflare.
+
 ## Features
 
 - 🔒 Automated SSL/TLS certificate requests using DNS-01 challenge
