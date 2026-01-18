@@ -76,7 +76,7 @@ build:
 	uv build
 
 # Publish package
-publish:
+publish: build
 	uv publish
 
 # Clean up
