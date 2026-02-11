@@ -6,7 +6,7 @@ authors = [{ name = "Olof Hellqvist", email = "olof.hellqvist@gmail.com" }]
 license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.10"
-keywords = ["cloudflare", "certbot", "ssl", "tls", "dns-01"]
+keywords = ["cloudflare", "certbot", "ssl", "tls"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: System Administrators",
