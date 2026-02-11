@@ -135,14 +135,26 @@ jobs:
       - name: Check all jobs
         id: check
         run: |
-          if [[ "${{ needs.lint.result }}" == "success" ]] && [[ "${{ needs.test.result }}" == "success" ]] && [[ "${{ needs.sbom.result }}" == "success" ]]; then
-            echo "success=true" >> $GITHUB_OUTPUT
-            echo "All checks passed!"
-          else
+          # Fail if any job failed or was cancelled
+          if [[ "${{ needs.lint.result }}" == "failure" || "${{ needs.lint.result }}" == "cancelled" ]] || \
+             [[ "${{ needs.test.result }}" == "failure" || "${{ needs.test.result }}" == "cancelled" ]] || \
+             [[ "${{ needs.sbom.result }}" == "failure" || "${{ needs.sbom.result }}" == "cancelled" ]]; then
             echo "success=false" >> $GITHUB_OUTPUT
-            echo "One or more checks failed"
+            echo "One or more checks failed or were cancelled"
             exit 1
           fi
+
+          # If it's a push to main, we additionally require success (not skip)
+          if [[ "${{ github.event_name }}" == "push" && "${{ github.ref }}" == "refs/heads/main" ]]; then
+            if [[ "${{ needs.lint.result }}" != "success" || "${{ needs.test.result }}" != "success" || "${{ needs.sbom.result }}" != "success" ]]; then
+              echo "success=false" >> $GITHUB_OUTPUT
+              echo "Checks were unexpectedly skipped on main branch"
+              exit 1
+            fi
+          fi
+
+          echo "success=true" >> $GITHUB_OUTPUT
+          echo "All checks passed (or were intentionally skipped during release)"
 
   draft-release:
     name: Draft Release
