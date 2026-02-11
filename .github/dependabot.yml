@@ -18,6 +18,8 @@ updates:
       prefix: "deps"
       prefix-development: "deps-dev"
       include: "scope"
+    assignees:
+      - "hellqvio86"
 
   # Monitor GitHub Actions
   - package-ecosystem: "github-actions"
@@ -33,3 +35,5 @@ updates:
     commit-message:
       prefix: "ci"
       include: "scope"
+    assignees:
+      - "hellqvio86"
