@@ -9,7 +9,7 @@ help:
 	@echo "  install              - Install uv and sync dependencies (alias for venv)"
 	@echo "  sync                 - Sync dependencies with uv"
 	@echo "  dev                  - Install development dependencies"
-	@echo "  run                  - Run the certificate request tool"
+	@echo "  run                  - Run the certificate request tool (requires sudo)"
 	@echo "  lint                 - Lint code with ruff"
 	@echo "  format               - Format code with ruff"
 	@echo "  check                - Run all checks (lint + format check)"
@@ -20,8 +20,8 @@ help:
 	@echo "  clean                - Remove virtual environment and cache files"
 	@echo ""
 	@echo "Usage examples:"
-	@echo "  make run DOMAIN=example.com EMAIL=admin@example.com"
-	@echo "  make run DOMAIN=example.com EMAIL=admin@example.com STAGING=1"
+	@echo "  sudo make run DOMAIN=example.com EMAIL=admin@example.com"
+	@echo "  sudo make run DOMAIN=example.com EMAIL=admin@example.com STAGING=1"
 
 # Create virtual environment and install dependencies
 venv:
@@ -44,8 +44,14 @@ dev:
 	uv sync --all-extras
 
 # Run the tool
-# Run the tool, forwarding DOMAIN, EMAIL, STAGING, etc. to Python
+# Run the tool, forwarding DOMAIN, EMAIL, STAGING, etc. to Python.
+# Requires root for LE certbot locks.
 run:
+	@if [ "$$(id -u)" -ne 0 ]; then \
+		echo "❌ Error: Certbot requires root privileges."; \
+		echo "Please run with: sudo make run ..."; \
+		exit 1; \
+	fi
 	uv run python -m cloudflare_request_cert.main \
 		$(if $(DOMAIN),-d $(DOMAIN)) \
 		$(if $(EMAIL),-e $(EMAIL)) \
