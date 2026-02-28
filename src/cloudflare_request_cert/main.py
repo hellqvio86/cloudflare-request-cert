@@ -99,8 +99,13 @@ def request_certificate(
     credentials_file.write_text(f"dns_cloudflare_api_token = {api_token}\n")
     credentials_file.chmod(0o600)
 
+    # Detect the correct certbot path (checks venv bin first)
+    python_bin_dir = Path(sys.executable).parent
+    certbot_bin = python_bin_dir / "certbot"
+    certbot_path = str(certbot_bin) if certbot_bin.exists() else "certbot"
+
     cmd = [
-        "certbot",
+        certbot_path,
         "certonly",
         "--dns-cloudflare",
         "--dns-cloudflare-credentials",
