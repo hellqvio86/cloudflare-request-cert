@@ -1,4 +1,4 @@
-.PHONY: help venv install sync dev run clean lint format check test build publish
+.PHONY: help venv install sync dev run sudo-run clean lint format check test build publish
 
 # Default target
 help:
@@ -9,7 +9,8 @@ help:
 	@echo "  install              - Install uv and sync dependencies (alias for venv)"
 	@echo "  sync                 - Sync dependencies with uv"
 	@echo "  dev                  - Install development dependencies"
-	@echo "  run                  - Run the certificate request tool (requires sudo)"
+	@echo "  run                  - Run the tool normally (using uv run)"
+	@echo "  sudo-run             - Run the tool with sudo (use this for production certs)"
 	@echo "  lint                 - Lint code with ruff"
 	@echo "  format               - Format code with ruff"
 	@echo "  check                - Run all checks (lint + format check)"
@@ -20,8 +21,8 @@ help:
 	@echo "  clean                - Remove virtual environment and cache files"
 	@echo ""
 	@echo "Usage examples:"
-	@echo "  sudo make run DOMAIN=example.com EMAIL=admin@example.com"
-	@echo "  sudo make run DOMAIN=example.com EMAIL=admin@example.com STAGING=1"
+	@echo "  make run DOMAIN=example.com EMAIL=admin@example.com STAGING=1"
+	@echo "  make sudo-run DOMAIN=example.com EMAIL=admin@example.com"
 
 # Create virtual environment and install dependencies
 venv:
@@ -43,16 +44,24 @@ sync:
 dev:
 	uv sync --all-extras
 
-# Run the tool
-# Run the tool, forwarding DOMAIN, EMAIL, STAGING, etc. to Python.
-# Requires root for LE certbot locks.
+# Detect uv path to handle sudo environments where PATH is stripped
+UV := $(shell command -v uv 2>/dev/null || which uv 2>/dev/null || echo uv)
+
+# Run the tool normally (e.g. for staging/testing)
 run:
-	@if [ "$$(id -u)" -ne 0 ]; then \
-		echo "❌ Error: Certbot requires root privileges."; \
-		echo "Please run with: sudo make run ..."; \
+	uv run python -m cloudflare_request_cert.main \
+		$(if $(DOMAIN),-d $(DOMAIN)) \
+		$(if $(EMAIL),-e $(EMAIL)) \
+		$(if $(STAGING),--staging)
+
+# Run the tool with sudo (required for Certbot locks in /var/log/letsencrypt)
+# We use the virtual environment Python directly to avoid PATH issues with 'uv' under sudo
+sudo-run:
+	@if [ ! -f .venv/bin/python ]; then \
+		echo "❌ Error: Virtual environment not found. Run 'make install' first."; \
 		exit 1; \
 	fi
-	uv run python -m cloudflare_request_cert.main \
+	sudo ./.venv/bin/python -m cloudflare_request_cert.main \
 		$(if $(DOMAIN),-d $(DOMAIN)) \
 		$(if $(EMAIL),-e $(EMAIL)) \
 		$(if $(STAGING),--staging)
