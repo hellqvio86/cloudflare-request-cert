@@ -17,7 +17,7 @@ This project is not affiliated with, endorsed by, or supported by Cloudflare.
 - ☁️ Cloudflare DNS API integration
 - ⚡ Fast dependency management with uv
 - 🛠️ Simple Makefile interface
-- 🔄 Support for certificate renewal
+- 🔄 Compatible with certbot's automatic renewal
 - 🧪 Staging environment support for testing
 - 📝 Configuration via .env file or command-line arguments
 - 🔧 Flexible: use .env, CLI args, or both
