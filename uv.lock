@@ -4,7 +4,7 @@ requires-python = ">=3.10"
 
 [[package]]
 name = "acme"
-version = "5.7.0"
+version = "5.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cryptography" },
@@ -13,9 +13,9 @@ dependencies = [
     { name = "pyrfc3339" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8d/53/2e79e7d1c5384414d4670f02729601cf23e61fe13b7b99471d02c620ddbe/acme-5.7.0.tar.gz", hash = "sha256:4be4fe6cf3809c3988d75fa1213ce8e784d9d5d8380cac63c2dca555e105653d", size = 90640, upload-time = "2026-07-15T17:40:26.01Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/3a/b8/4ca6f1b0e04472d21b248d32a6abc5e24058dac68b513a8ab7526837b100/acme-5.8.0.tar.gz", hash = "sha256:44c4edb53acdd3fa8402cb29c78a6d1bd2005d777a4d2fcd12663bbc3c147b34", size = 91121, upload-time = "2026-09-01T21:15:36.946Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0b/af/b5f590040cd2efae675ff5c9da533abcf3011c6d0b7b67e118aa86c14ceb/acme-5.7.0-py3-none-any.whl", hash = "sha256:a736f88e975f0ebe8c6fcabd3db164d1071b4f9e1a56d1319a9f6997e0a64a0a", size = 95023, upload-time = "2026-07-15T17:40:07.404Z" },
+    { url = "https://files.pythonhosted.org/packages/73/f8/4e40a19169b540aca57e5d1f260dfb184a2cf27c8a3c5165a28bcba975d9/acme-5.8.0-py3-none-any.whl", hash = "sha256:637501767248156545d85c23b806381ac346c5eac759f8e35052af85b7bb3933", size = 95024, upload-time = "2026-09-01T21:15:18.526Z" },
 ]
 
 [[package]]
@@ -74,7 +74,7 @@ wheels = [
 
 [[package]]
 name = "certbot"
-version = "5.7.0"
+version = "5.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "acme" },
@@ -87,23 +87,23 @@ dependencies = [
     { name = "pyrfc3339" },
     { name = "pywin32", marker = "sys_platform == 'win32'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/1a/eb1d1ff8682fbfcf7089f5e0cad80c259646f44cc85ce9d3533af901b3e6/certbot-5.7.0.tar.gz", hash = "sha256:c896a0aa3fe1fa1e344002d4a24a5934889a88b8759f41a22b4dcfe5a8e27b94", size = 704446, upload-time = "2026-07-15T17:40:27.455Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/31/29/fbf5127d2b8d178d7add2b9145560436a69b437045c6197a4b6edbfcbb3c/certbot-5.8.0.tar.gz", hash = "sha256:a4a2c7b0459bb626b3791ef07b6df26bbb222d2324783ba3e60f76c0933eec87", size = 708523, upload-time = "2026-09-01T21:15:48.114Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/12/70/b874a4aacc016f9136bd63d3ef6d23d0066759bfb4cbae4d7559c4f2b1a0/certbot-5.7.0-py3-none-any.whl", hash = "sha256:7e5e8f023c5eb4753f4b74f97c26ddd57e43493e82b76eeefb741c120a7d49b6", size = 780839, upload-time = "2026-07-15T17:40:08.913Z" },
+    { url = "https://files.pythonhosted.org/packages/71/a9/7742882b276c06e430fb23da13e4512b3cd89d4aa6fb9ddfd7b96812bbff/certbot-5.8.0-py3-none-any.whl", hash = "sha256:c06793e6a0169b07ee09e11e6a017c7d5a77310055d693fffd66c53363ab87ff", size = 781034, upload-time = "2026-09-01T21:15:35.532Z" },
 ]
 
 [[package]]
 name = "certbot-dns-cloudflare"
-version = "5.7.0"
+version = "5.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "acme" },
     { name = "certbot" },
     { name = "cloudflare" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/5a/52/15c18787532d61580d1dd862ea9a219651154a6eab52bfd20a8f09808a86/certbot_dns_cloudflare-5.7.0.tar.gz", hash = "sha256:c5e0b6970390a2eaff1dc07606133ce1db7c1b4e565d0b54baf5914fe5bb9087", size = 17127, upload-time = "2026-07-15T17:40:29.44Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/21/38/ad863b378fe3f27445c8b6a31fe67710720cf1aff493e17d8c1e0483fed1/certbot_dns_cloudflare-5.8.0.tar.gz", hash = "sha256:540870f24a7aa05d9057bfa70cb684094b4106838747e15990f498ef16b7d212", size = 18001, upload-time = "2026-09-01T21:15:38.292Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/ff/0b/d41598f1a43128365cd65e8ff98cbb07a159294cdb59832a0f178d4f16d9/certbot_dns_cloudflare-5.7.0-py3-none-any.whl", hash = "sha256:03c14d34d5a33a117bf2aa71284498321dfb08fe80af123e9bf7dfc1445933ee", size = 15158, upload-time = "2026-07-15T17:40:11.242Z" },
+    { url = "https://files.pythonhosted.org/packages/c5/0f/927e6a6c4d714169bfaba6ea22472e6ff5d4acefc307f190811964567022/certbot_dns_cloudflare-5.8.0-py3-none-any.whl", hash = "sha256:372276cb7477af4799cffe22bb1ebb2dd6e9e226d0126117431e3a83866f8e3e", size = 16031, upload-time = "2026-09-01T21:15:21.096Z" },
 ]
 
 [[package]]
