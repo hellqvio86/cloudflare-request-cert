@@ -1,4 +1,4 @@
-.PHONY: help venv install sync dev run sudo-run clean lint format check test build publish
+.PHONY: help venv install sync dev run sudo-run clean lint format check test build publish renovate renovate-summary
 
 # Default target
 help:
@@ -105,3 +105,10 @@ clean:
 	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
 	find . -type f -name "*.pyc" -delete
 	@echo "Cleaned up cache and virtual environment"
+
+renovate:
+	@./bin/renovate/run.sh
+
+renovate-summary:
+	@./bin/renovate/run.sh --summary
+
