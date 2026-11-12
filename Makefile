@@ -80,7 +80,8 @@ check: lint
 
 # Run tests
 test:
-	uv run pytest tests/ -v
+	uv run pytest tests/ -v --cov=. --cov-fail-under=80 --cov-report=term-missing --cov-report=json
+	uv run python .github/scripts/generate_coverage_badge.py
 
 # Generate SBOM
 sbom:
